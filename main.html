@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pour Toi, Mon Amour ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&family=Sacramento&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <style>
+    :root {
+      --primary-color: #ff6b9e;
+      --secondary-color: #ff8fab;
+      --accent-color: #ff477e;
+      --text-dark: #5a2a3e;
+      --text-light: #fff5f8;
+      --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #ffe5eb 50%, #ffd6e4 100%);
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-dark);
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+      animation: gradientPulse 15s ease infinite alternate;
+      background-size: 200% 200%;
+    }
+    
+    @keyframes gradientPulse {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .heart {
+      position: absolute;
+      pointer-events: none;
+      animation: float 4s ease-in-out infinite;
+      opacity: 0.7;
+      user-select: none;
+      font-size: 1.5rem;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+    
+    #welcome-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    #welcome {
+      font-size: 3.5rem;
+      font-family: 'Dancing Script', cursive;
+      color: var(--accent-color);
+      margin-bottom: 2rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    
+    #welcome::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50%;
+      height: 3px;
+      background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+    }
+    
+    #response-buttons {
+      display: flex;
+      gap: 20px;
+      margin-top: 30px;
+      animation: fadeIn 1s ease-in 0.5s both;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .btn {
+      padding: 15px 35px;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      font-weight: 600;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      z-index: 1;
+      user-select: none;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+      z-index: -1;
+      transition: all 0.3s ease;
+      border-radius: 50px;
+    }
+    
+    .btn:hover::before {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+    
+    .btn-yes {
+      background: linear-gradient(45deg, #ff6b9e, #ff477e);
+      color: white;
+    }
+    
+    .btn-no {
+      background: linear-gradient(45deg, #a8a8a8, #7a7a7a);
+      color: white;
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    
+    .btn:active {
+      transform: translateY(1px);
+    }
+    
+    #love-message {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 30px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      backdrop-filter: blur(5px);
+      font-size: 1.6rem;
+      line-height: 1.8;
+      font-family: 'Courier New', Courier, monospace;
+      color: var(--text-dark);
+      border: 1px solid rgba(255,255,255,0.3);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease;
+      user-select: none;
+      min-height: 120px;
+      white-space: pre-wrap;
+    }
+
+    
+    #love-message.show {
+      opacity: 1;
+      transform: translateY(0);
+      animation: floatMessage 4s ease-in-out infinite;
+    }
+    
+    #gallery {
+      padding: 60px 20px;
+      background: rgba(255,255,255,0.3);
+      margin-top: 60px;
+      position: relative;
+    }
+    
+    #gallery::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 30px;
+      background: linear-gradient(to bottom, rgba(255,214,228,1), rgba(255,214,228,0));
+      pointer-events: none;
+    }
+    
+    #gallery h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3.5rem;
+      color: var(--accent-color);
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    
+    .gallery-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .memory {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
+      position: relative;
+      background: white;
+      user-select: none;
+      height: 350px; /* Hauteur fixe pour toutes les mémoires */
+    }
+    
+    .memory:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    
+    .memory img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      display: block;
+    }
+    
+    .memory:hover img {
+      transform: scale(1.1);
+    }
+    
+    .caption {
+      padding: 20px;
+      text-align: center;
+      font-weight: 600;
+      background: white;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .memory::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(255,107,158,0.3), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      border-radius: 15px;
+    }
+    
+    .memory:hover::after {
+      opacity: 1;
+    }
+    
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: visible;
+    }
+    
+    /* Animation de flottement pour le message */
+    @keyframes floatMessage {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @media (max-width: 768px) {
+      #welcome {
+        font-size: 2.5rem;
+      }
+      
+      #response-buttons {
+        gap: 15px;
+      }
+      
+      .btn {
+        padding: 12px 28px;
+        font-size: 1rem;
+      }
+      
+      .memory {
+        height: 250px; /* Hauteur réduite sur mobile */
+      }
+    }
+    
+    /* Confettis */
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      opacity: 0.8;
+      border-radius: 2px;
+      animation-name: confettiFall;
+      animation-timing-function: linear;
+      animation-iteration-count: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Styles pour les vidéos */
+    .video-memory {
+      position: relative;
+      height: 100%;
+    }
+    
+    .video-memory video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+    
+    .video-play-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background-color: rgba(255, 107, 158, 0.7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      opacity: 0.9;
+      transition: all 0.3s ease;
+    }
+    
+    .video-play-icon::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      border-left: 25px solid white;
+      margin-left: 5px;
+    }
+    
+    .video-memory:hover .video-play-icon {
+      transform: translate(-50%, -50%) scale(1.1);
+      opacity: 1;
+    }
+    
+    /* Style pour vidéo en plein écran */
+    .video-fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .video-fullscreen video {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+    }
+    
+    .close-video {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+  </style>
+</head>
+<body>
+  <div id="floatingHearts" class="floating-hearts"></div>
+    <header style="
+  text-align: center;
+  font-family: 'Brush Script MT', cursive, 'Georgia', serif;
+  font-size: 2.5rem;
+  margin: 30px 0;
+  color: #2b2829;
+  background: linear-gradient(135deg, #ffe6f0, #ff66a3);
+  padding: 15px 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(255, 51, 102, 0.4);
+  letter-spacing: 1.2px;
+  text-shadow: 1px 1px 5px rgba(255, 102, 153, 0.7);
+  animation: pulse 3s infinite alternate;
+  user-select: none;
+">
+
+  Leslye NKWA, je t'aime
+
+</header>
+  <main id="welcome-container">
+    <h1 id="welcome" class="animate__animated animate__zoomIn">Bienvenue, mon amour ❤️</h1>
+
+    <p style="font-size:1.4rem; max-width: 400px; margin: 0 auto;">
+      J’espère que tu vas bien ?
+    </p>
+
+    <div id="response-buttons" class="animate__animated animate__fadeInUp">
+      <button class="btn btn-yes" onclick="respond('oui')">Oui 😊</button>
+      <button class="btn btn-no" onclick="respond('non')">Non 😢</button>
+    </div>
+
+    <div id="love-message"></div>
+  </main>
+
+  <section id="gallery">
+    <h2>Nos souvenirs 💖</h2>
+    <div class="gallery-container">
+      <!-- Photo 1 -->
+      <div class="memory">
+        <img src="medias/IMG-20250612-WA0008.jpg" alt="Souvenir 1" />
+        <div class="caption">Notre premier voyage ensemble</div>
+      </div>
+      
+      <!-- Photo 2 -->
+      <div class="memory">
+        <img src="medias/IMG-20250614-WA0011.jpg" alt="Souvenir 2" />
+        <div class="caption">Un moment inoubliable</div>
+      </div>
+      
+      <!-- Photo 3 -->
+      <div class="memory">
+        <img src="medias/IMG-20250614-WA0020.jpg" alt="Souvenir 3" />
+        <div class="caption">Notre soirée magique</div>
+      </div>
+      
+      <!-- Photo 4 -->
+      <div class="memory">
+        <img src="medias/IMG-20250614-WA0026.jpg" alt="Souvenir 4" />
+        <div class="caption">Rires et complicité</div>
+      </div>
+
+      <!-- Photo 4 -->
+      <div class="memory">
+        <img src="medias/IMG-20250614-WA0010.jpg" alt="Souvenir 4" />
+        <div class="caption">Rires et complicité</div>
+      </div>
+
+       <!-- Photo 4 -->
+      <div class="memory">
+        <img src="medias/IMG-20250614-WA0013.jpg" alt="Souvenir 4" />
+        <div class="caption">Rires et complicité</div>
+      </div>
+
+      <!-- Photo 4 -->
+      <div class="memory">
+        <img src="medias/IMG-20250614-WA0021.jpg" alt="Souvenir 4" />
+        <div class="caption">Rires et complicité</div>
+      </div>
+      
+      <!-- Vidéo 1 -->
+      <div class="memory">
+        <div class="video-memory" onclick="playVideo(this)">
+          <video>
+            <source src="medias/VID-20250614-WA0002.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo.
+          </video>
+          <div class="video-play-icon"></div>
+          <div class="caption">Nos moments de joie</div>
+        </div>
+      </div>
+
+      <div class="memory">
+        <div class="video-memory" onclick="playVideo(this)">
+          <video>
+            <source src="medias/VID-20250614-WA0004.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo.
+          </video>
+          <div class="video-play-icon"></div>
+          <div class="caption">Nos moments de joie</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Création des cœurs flottants en arrière-plan
+    function createFloatingHearts() {
+      const container = document.getElementById('floatingHearts');
+      const heartCount = 20;
+
+      for (let i = 0; i < heartCount; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = '❤️';
+        heart.style.left = `${Math.random() * 100}vw`;
+        heart.style.top = `${Math.random() * 100}vh`;
+        heart.style.fontSize = `${10 + Math.random() * 25}px`;
+        heart.style.animationDuration = `${3 + Math.random() * 3}s`;
+        heart.style.animationDelay = `${Math.random() * 5}s`;
+        container.appendChild(heart);
+      }
+    }
+
+    createFloatingHearts();
+
+    // Messages d'amour à afficher selon la réponse
+const loveMessages = {
+  oui: `Il y a des mots qu’on dit chaque jour, et d’autres qu’on garde dans le silence du cœur. 
+Aujourd’hui, je veux briser ce silence pour te dire l’essentiel : tu es mon évidence, mon repère, 
+ma douceur dans ce monde parfois trop dur.
+
+Je t’aime non pas seulement pour ce que tu es, mais pour ce que je suis quand je suis avec toi. 
+À tes côtés, je me sens complet, meilleur, vivant. Tu es cette lumière qui éclaire mes doutes, 
+ce refuge où je dépose mes peines, cette force tranquille qui me pousse à avancer.
+
+Je ne te promets pas un amour parfait, mais je te promets un amour vrai. 
+Un amour qui reste quand tout vacille. Un amour qui choisit, chaque jour, toi.
+
+Merci d’être celle qui fait battre mon cœur autrement. Merci d’être toi.
+Je t’aime, profondément. Et je n’en finirai jamais de te le prouver. 💕`,
+
+  non: `Mon trésor,
+
+Je sais que tu ne te sens pas bien en ce moment, et mon cœur le ressent autant que toi. 
+J’aimerais pouvoir prendre ta peine, ton mal-être ou ta fatigue et les porter à ta place. 
+Mais en attendant, permets-moi d’être ton refuge, ton soutien, ton épaule douce et solide.
+
+Tu n’as pas à être forte tout le temps. Tu as le droit d’avoir des jours sans, de douter, 
+de pleurer, de ralentir. Moi, je suis là, dans les jours de lumière comme dans les jours de grisaille. 
+Je ne bouge pas. Je tiens ta main. Je t’écoute. Je t’aime.
+
+Prends ton temps. Respire. Et souviens-toi que même dans l’ombre, tu restes la plus belle lumière de ma vie.  
+Repose-toi, mon amour. Moi, je veille sur toi, toujours.
+
+Je t’aime fort, et je suis là. ❤️`
+};
+
+
+    // Fonction d'effet dactylographié
+    function typeWriter(text, element, speed = 50) {
+      element.textContent = "";
+      let i = 0;
+      function typing() {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          setTimeout(typing, speed);
+        }
+      }
+      typing();
+    }
+
+    // Gestion de la réponse utilisateur
+    function respond(answer) {
+      const buttons = document.getElementById('response-buttons');
+      const loveMessage = document.getElementById('love-message');
+
+      // Cacher les boutons
+      buttons.style.display = 'none';
+
+      // Afficher le message avec animation
+      loveMessage.classList.add('show');
+      typeWriter(loveMessages[answer], loveMessage);
+
+      // Lancer des confettis festifs
+      launchConfetti();
+    }
+
+    // Confettis simples pour effet festif
+    function launchConfetti() {
+      const container = document.getElementById('floatingHearts');
+      const colors = ['#ff6b9e', '#ff8fab', '#ff477e', '#ffcade'];
+
+      for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = `${Math.random() * 100}vw`;
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDuration = `${3 + Math.random() * 3}s`;
+        confetti.style.animationDelay = `${Math.random() * 2}s`;
+        container.appendChild(confetti);
+
+        // Supprimer le confetti après l'animation
+        confetti.addEventListener('animationend', () => {
+          confetti.remove();
+        });
+      }
+    }
+
+    // Fonction pour lire la vidéo en plein écran
+    function playVideo(videoContainer) {
+      const video = videoContainer.querySelector('video');
+      const videoSrc = video.querySelector('source').src;
+      
+      // Créer un conteneur plein écran
+      const fullscreenContainer = document.createElement('div');
+      fullscreenContainer.className = 'video-fullscreen';
+      
+      // Créer l'élément vidéo en plein écran
+      const fullscreenVideo = document.createElement('video');
+      fullscreenVideo.controls = true;
+      fullscreenVideo.autoplay = true;
+      fullscreenVideo.innerHTML = `<source src="${videoSrc}" type="video/mp4">`;
+      
+      // Bouton de fermeture
+      const closeButton = document.createElement('span');
+      closeButton.className = 'close-video';
+      closeButton.innerHTML = '&times;';
+      closeButton.onclick = () => {
+        document.body.removeChild(fullscreenContainer);
+        fullscreenVideo.pause();
+      };
+      
+      // Ajouter les éléments au DOM
+      fullscreenContainer.appendChild(fullscreenVideo);
+      fullscreenContainer.appendChild(closeButton);
+      document.body.appendChild(fullscreenContainer);
+      
+      // Fermer en cliquant sur le fond
+      fullscreenContainer.onclick = (e) => {
+        if (e.target === fullscreenContainer) {
+          document.body.removeChild(fullscreenContainer);
+          fullscreenVideo.pause();
+        }
+      };
+    }
+
+    // Optionnel: Précharger les vidéos pour une meilleure expérience
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.video-memory video').forEach(video => {
+        video.preload = 'metadata';
+      });
+    });
+  </script>
+</body>
+</html>
